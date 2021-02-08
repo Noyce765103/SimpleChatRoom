@@ -21,10 +21,10 @@ using namespace std;
 list<int> clients_list;
 
 //server ip
-#define SERVER_IP "127.0.0.1"
+#define SERVER_IP "106.54.92.222"
 
 //server port
-#define SERVER_PORT 9873
+#define SERVER_PORT 43985
 
 //epoll size 
 #define EPOLL_SIZE 5000

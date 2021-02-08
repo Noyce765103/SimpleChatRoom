@@ -40,9 +40,9 @@ int main(int argc, char *argv[])
                 isClientwork = 0;
             else
             {
-                if(splice(STDIN_FILENO, NULL, pipe_fd[1], NULL, BUF_SIZE, SPLICE_F_MOVE | SPLICE_F_MORE) < 0)
+                if(write(pipe_fd[1], message, strlen(message) - 1) < 0)
                 {
-                    perror("splice error");
+                    perror("fork error");
                     exit(-1);
                 }
             }
@@ -69,9 +69,10 @@ int main(int argc, char *argv[])
                 }
                 else
                 {
-                
-                    if(splice(pipe_fd[0], NULL, sock, NULL, BUF_SIZE, SPLICE_F_MOVE | SPLICE_F_MORE) == 0)    isClientwork = 0;
-                    
+                    int ret = read(events[i].data.fd, message, BUF_SIZE);
+                    if(ret == 0)    isClientwork = 0;
+                    else
+                        send(sock, message, BUF_SIZE, 0);
                 }
             }
         }

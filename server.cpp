@@ -36,7 +36,7 @@ int main()
             {
                 struct sockaddr_in clientAddr;
                 socklen_t client_addrLen = sizeof(struct sockaddr_in);
-                int clientfd = accept(clientfd, (sockaddr*)&clientAddr, &client_addrLen);
+                int clientfd = accept(sockfd, (sockaddr*)&clientAddr, &client_addrLen);
                 printf("client connection from: %s : %d(IP : port), clientfd = %d \n",
                         inet_ntoa(clientAddr.sin_addr),
                         ntohs(clientAddr.sin_port),
@@ -44,7 +44,7 @@ int main()
                 addfd(epfd, clientfd, true);
 
                 clients_list.push_back(clientfd);
-                printf("Now there are %d clients in the chart room\n", (int)clients_list.size());
+                printf("Now there are %d clients in the chat room\n", (int)clients_list.size());
 
                 char message[BUF_SIZE];
                 memset(message,'\0', BUF_SIZE);
